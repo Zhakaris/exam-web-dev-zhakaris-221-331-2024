@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mt-4">Add Book</h1>
+  <form method="POST" action="{{ url_for('main.add_book') }}" enctype="multipart/form-data" novalidate>
+    {{ form.hidden_tag() }}
+    {% from "_book_form.html" import render_book_form %}
+    {{ render_book_form(form) }}
+    <input type="hidden" id="hidden-description" name="description">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var easyMDE = new EasyMDE({
+        element: document.getElementById('description'),
+        spellChecker: false,
+        initialValue: document.getElementById('description').value
+      });
+
+      document.querySelector('form').addEventListener('submit', function(event) {
+        var hiddenDescription = document.getElementById('hidden-description');
+        hiddenDescription.value = easyMDE.value();
+        
+        if (hiddenDescription.value.trim() === '') {
+          alert('Описание не может быть пустым.');
+          event.preventDefault(); // Останавливает отправку формы
+        }
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% macro render_book_form(form, include_cover=True) %}
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.year.label(class="form-label") }}
+        {{ form.year(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.publisher.label(class="form-label") }}
+        {{ form.publisher(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.author.label(class="form-label") }}
+        {{ form.author(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.pages.label(class="form-label") }}
+        {{ form.pages(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.genres.label(class="form-label") }}
+        {{ form.genres(class="form-control") }}
+    </div>
+    {% if include_cover %}
+    <div class="mb-3">
+        {{ form.cover.label(class="form-label") }}
+        {{ form.cover(class="form-control") }}
+    </div>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1 class="mt-4">Edit Book</h1>
+  <form method="POST" action="{{ url_for('main.edit_book', id=book.id) }}">
+    {{ form.hidden_tag() }}
+    {% from "_book_form.html" import render_book_form %}
+    {{ render_book_form(form, include_cover=False) }}
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var easyMDE = new EasyMDE({
+        element: document.getElementById('description'),
+        spellChecker: false,
+        initialValue: document.getElementById('description').value
+      });
+    });
+  </script>
+{% endblock %}

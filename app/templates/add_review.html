@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="mt-4">
+    <h1>Write a Review for {{ book.title }}</h1>
+    <form method="POST" action="{{ url_for('main.add_review', book_id=book.id) }}">
+      {{ form.hidden_tag() }}
+      <div class="mb-3">
+        {{ form.rating.label(class="form-label") }}
+        {{ form.rating(class="form-select") }}
+      </div>
+      <div class="mb-3">
+        {{ form.review_text.label(class="form-label") }}
+        {{ form.review_text(class="form-control") }}
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var descriptionElement = document.getElementById('description');
+      var rawDescription = descriptionElement.innerText;
+      var renderedDescription = marked(rawDescription);
+      descriptionElement.innerHTML = renderedDescription;
+    });
+  </script>
+{% endblock %}
